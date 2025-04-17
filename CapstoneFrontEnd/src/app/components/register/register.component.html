@@ -1,0 +1,55 @@
+<!-- <h2>Register User Component</h2>
+<div class="col-6">
+    <form class="row gy-2 gx-3 align-items-center">
+        <div class="col-auto">
+          <label for="autoSizingInput">Name</label>
+          <input type="text" [(ngModel)]="user.name" [ngModelOptions]="{standalone: true}">
+        </div>        
+        <div class="col-auto">
+            <label for="autoSizingInput">Email</label>
+            <input type="text" [(ngModel)]="user.email" [ngModelOptions]="{standalone: true}">
+        </div> 
+        <div class="col-auto">
+            <label for="autoSizingInput">Password</label>
+            <input type="password" [(ngModel)]="user.password" [ngModelOptions]="{standalone: true}">
+        </div>
+        <div class="col-auto">
+            <label for="autoSizingInput">Role</label>
+            <select [(ngModel)]="user.role">
+              <option value="ADMIN">ADMIN</option>
+              <option value="STAFF">STAFF</option>
+            </select>
+            <input type="text" [(ngModel)]="user.role" [ngModelOptions]="{standalone: true}">
+        </div> 
+        <div class="col-auto">
+          <button type="submit" (click)="registerUser()" class="btn btn-primary">Submit</button>
+        </div>
+      </form>
+  </div> -->
+
+  <div class="container mt-5" style="max-width: 400px;">
+    <h3 class="mb-4 text-center">Register</h3>
+    <form [formGroup]="myForm">
+      <label for="name">Name</label>
+          <input type="text" [(ngModel)]="user.name" class="form-control" formControlName="name"  placeholder="Enter Name"/>
+      <div class="mb-3">
+        <label for="email" class="form-label">Email address</label>
+        <input type="text" [(ngModel)]="user.email" class="form-control" formControlName="email"  placeholder="Enter email" />
+      </div>
+  
+      <div class="mb-3">
+        <label for="password" class="form-label">Password</label>
+        <input type="password"  [(ngModel)]="user.password" formControlName="password" class="form-control" placeholder="Password" />
+      </div>
+  
+      <div class="mb-3">
+        <label for="role" class="form-label">Role</label>
+        <select class="form-select" [(ngModel)]="user.role" formControlName="role">
+          <option value="ADMIN">ADMIN</option>
+          <option value="STAFF">STAFF</option>
+        </select>
+      </div>
+  
+      <button type="submit" (click)="registerUser()" class="btn btn-primary w-100">Register</button>
+    </form>
+  </div>

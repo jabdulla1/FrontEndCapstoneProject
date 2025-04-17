@@ -1,0 +1,59 @@
+<h1 class="text-center">Welcome to Supplier Page</h1>
+
+<h3>Add Supplier</h3>
+<div class="row-12 mb-3 row-12 d-flex justify-content-center">
+    <form [formGroup]="myForm" class="row gy-2 gx-3 align-items-center">
+        <div class="col-auto">
+          <label for="autoSizingInput">Supplier Name</label>
+          <input type="text" [(ngModel)]="supplierDTO.name" formControlName="name"/>
+        </div>  
+        <div class="col-auto">
+            <label for="autoSizingInput">Contact Information</label>
+            <input type="text" [(ngModel)]="supplierDTO.contactInfo" formControlName="contactInfo"/>
+          </div>  
+          <div class="col-auto">
+            <label for="autoSizingInput">Rating</label>
+            <input type="text" [(ngModel)]="supplierDTO.rating" formControlName="rating" />
+          </div>    
+        <div class="col-auto">
+          <button type="submit" (click)="addSupplier()" class="btn btn-primary">Submit</button>
+        </div>
+      </form>
+  </div>
+
+
+<div class="row">
+    <div class="col-12">
+        <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th scope="col">SNo</th>
+                <th scope="col">Supplier ID</th>
+                <th scope="col">Supplier Name</th>
+                <th scope="col">Contact Info</th>
+                <th scope="col">Rating</th>
+                <th scope="col">Actions</th>
+              </tr>
+            </thead> 
+            <tbody>
+                @for (supplier of supplierDTOs; track $index) {
+              <tr>
+                <th>{{$index+1}}</th>
+                <td>{{supplier.id}}</td>
+                <td>{{supplier.name}}</td>
+                <td>{{supplier.contactInfo}}</td>
+                <td>{{supplier.rating}}</td>
+                <td><button class=" btn btn-primary mx-2" (click)="updateSetSupplier($index)">Edit</button>
+                <button class=" btn btn-primary" (click)="deleteSupplier(supplier.id)">Delete</button></td>
+              </tr>
+            }
+            </tbody>
+          </table>
+    </div>
+</div>
+
+<!-- <div *ngIf="show"  class="" >
+  <button (click)="hideOrderDetails()"class="btn btn-primary">Hide Order Details</button>
+  <app-order-detail [productDao]="productDaoShow"></app-order-detail>
+</div> -->
+

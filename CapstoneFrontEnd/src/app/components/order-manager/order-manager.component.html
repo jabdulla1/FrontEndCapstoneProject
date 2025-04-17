@@ -1,0 +1,57 @@
+<h1 class="text-center">Welcome To Order Management Page</h1>
+
+<h3>Place Order</h3>
+
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <label for="autoSizingInput">Supplier ID</label>
+          <input type="number" [(ngModel)]="orderRequestDTO.supplier_id" formControlName="name" />
+    <div formArrayName="dynamicFields">
+      <div *ngFor="let group of dynamicFields.controls; let i = index" [formGroupName]="i" style="margin-bottom: 10px;">
+        <label class="mx-2">Product Sku</label><input formControlName="sku" placeholder="ID (number)" type="number" required/>
+        <label class="mx-2">Quantity</label><input formControlName="quantity" placeholder="Value (number)" type="number" required />
+        <button type="button" (click)="removeField(i)">Remove</button>
+      </div>
+    </div>
+  
+    <button type="button" (click)="addField()">Add Field</button>
+    <button type="submit">Submit</button>
+  </form>
+
+
+<div class="row-12 d-flex justify-content-center">
+    <div class="col-6">
+        @for (order of orderDTOs; track $index) {
+        <div class="card">
+            <div class="card-body">
+
+                <div class="d-flex mb-3">
+                <h5 class="mx-2">Order Id:</h5>
+                <h6 class="align-content-center">{{order.orderId}}</h6>
+                </div>
+                <h5 class="mx-2">Supplier</h5>
+                <div class="d-flex">
+                <h6 class="mx-2">Supplier ID</h6><h2 class="card-title">{{order.supplier.id}}</h2>
+                <h6 class="mx-2">Name</h6><h2 class="card-title">{{order.supplier.name}}</h2>
+                <h6 class="mx-2">ContactInfo</h6><h2 class="card-title">{{order.supplier.contactInfo}}</h2>
+                <h6 class="mx-2">Rating</h6><h2 class="card-title">{{order.supplier.rating}}</h2>
+                </div>
+                <h5>Product List</h5>
+                
+                @for (product of order.productList; track $index) {
+                <div class="d-flex">
+                <h6 class="mx-2">No</h6><h2 class="card-title">{{$index+1}}</h2>
+                <h6 class="mx-2">Product ID:</h6><h2 class="card-title">{{product.productSku}}</h2>
+                <h6 class="mx-2">Producdt Name</h6><h2 class="card-title">{{product.productName}}</h2>
+                <h6 class="mx-2">Product Quantity</h6><h2 class="card-title">{{product.productQuantity}}</h2>
+                </div>    
+                }
+                
+                <h2 class="card-title">{{order.totalPrice}}</h2>
+                <button class=" btn btn-primary mx-3" (click)="loadMapIntoForm($index, order)">Edit</button>
+                <button class=" btn btn-primary" (click)="deleteOrder(order.orderId)" >Delete</button>
+                
+            </div>
+        </div>
+    }
+    </div>
+</div>
